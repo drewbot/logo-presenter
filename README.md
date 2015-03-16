@@ -1,5 +1,5 @@
 #Logo Presenter#
-A custom template for presenting logo options. Display logos in a scrolling gallery with an option to reverse the color scheme.
+A customizable template for presenting logo options. Display logos in a scrolling gallery with an option to reverse the color scheme.
 
 ##Demos##
 
