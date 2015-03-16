@@ -1,0 +1,304 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/////////////////////////////////////// Browse happy
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/////////////////////////////////////// Variables
+// primary color
+$red: #CE1F3D;
+$blue: #0B2C4B;
+$green: #04996A;
+$white: #fff;
+
+
+/////////////////////////////////////// Mixins
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin animation($animation) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    -o-animation: $animation;
+    animation: $animation;
+}
+
+@mixin animation-name($name) {
+    -webkit-animation-name: $name;
+    -moz-animation-name: $name;
+    -o-animation-name: $name;
+    animation-name: $name;
+}
+
+@mixin animation-delay($delay) {
+    -webkit-animation-delay: $delay;
+    -moz-animation-delay: $delay;
+    -o-animation-delay: $delay;
+    animation-delay: $delay;
+}
+
+@mixin animation-duration($duration) {
+    -webkit-animation-duration: $duration;
+    -moz-animation-duration: $duration;
+    -o-animation-duration: $duration;
+    animation-duration: $duration;
+}
+
+@mixin animation-timing-function($timing-function) {
+    -webkit-animation-timing-function: $timing-function;
+    -moz-animation-timing-function: $timing-function;
+    -o-animation-timing-function: $timing-function;
+    animation-timing-function: $timing-function;
+}
+
+@mixin animation-iteration-count($iteration-count) {
+    -webkit-animation-iteration-count: $iteration-count;
+    -moz-animation-iteration-count: $iteration-count;
+    -o-animation-iteration-count: $iteration-count;
+    animation-iteration-count: $iteration-count;
+}
+
+@mixin animation-fill-mode($fill-mode) {
+    -webkit-animation-fill-mode: $fill-mode;
+    -moz-animation-fill-mode: $fill-mode;
+    -o-animation-fill-mode: $fill-mode;
+    animation-fill-mode: $fill-mode;
+}
+
+@mixin transition($transition) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+@mixin transform($transformation) {
+    -webkit-transform: $transformation;
+    -moz-transform: $transformation;
+    -o-transform: $transformation;
+    transform: $transformation;
+}
+
+@mixin buttontext($color) {
+    font-family: "Lato", sans-serif;
+    font-size: 1.1em;
+    font-style: lighter;
+    font-weight: 300;
+    color: $color;
+}
+
+@mixin configuresection($background, $buttons) {
+    position: relative;
+    background-color: $background;
+    padding-top: 80px;
+    .reverse, .move-down {
+        color: $buttons;
+    }
+    .down-arrow polyline {
+        stroke: $buttons;
+    }
+    .reverse-arrow polyline, .reverse-arrow path {
+        stroke: $buttons;
+    }
+}
+
+/////////////////////////////////////// Global
+body {
+    background: #fafafa;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+section {
+    width: 100%;
+    height: 100%;  
+}
+
+////////////////////////////////////// Buttons
+.reverse {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 170px;
+    padding: 25px 20px 20px 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    @include buttontext($white);
+    @include transition(all 0.3s ease-in-out);
+    cursor: pointer;
+
+}
+
+.move-down {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 62%;
+    left: 0;
+    right: 0;
+    width: 150px;
+    height: 100px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    @include buttontext($white);
+    @include transition(all 0.3s ease-in-out);
+    cursor: pointer;
+}
+
+.down-arrow {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 60px;
+    left: 0;
+    right: 0;
+}
+
+///////////////////////////////// Section Setup //////////////////////
+// Add images to images folder and un-comment background url's below
+// Include background color and button color within configuresection()
+
+///////////////////////////////// Option 1
+.option-1 {
+    @include configuresection($red, $white);
+    .inner-wrapper {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        // background: url("../images/logo-option-1-color.png");
+    }
+}
+
+.option-1-reverse {
+    @include configuresection($white, $red);
+    .inner-wrapper {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        // background: url("../images/logo-option-1-white.png");
+    }
+}
+
+////////////////////////////////// Option 2
+.option-2 {
+    @include configuresection($blue, $white);
+    .inner-wrapper {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        // background: url("../images/logo-option-2-color.png");
+    }
+}
+
+.option-2-reverse {
+    @include configuresection($white, $blue);
+    .inner-wrapper {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        // background: url("../images/logo-option-2-white.png");
+    }
+}
+
+////////////////////////////////// Option 3
+.option-3 {
+    @include configuresection($green, $white);
+    .inner-wrapper {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        // background: url("../images/logo-option-3-color.png");
+    }
+}
+
+.option-3-reverse {
+    @include configuresection($white, $green);
+    .inner-wrapper {
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+        // background: url("../images/logo-option-3-white.png");
+    }
+}
+
+
