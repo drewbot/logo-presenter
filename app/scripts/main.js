@@ -1,5 +1,5 @@
 $('document').ready(function(){
-
+   // Any loading animation of option-1 could happen here
 })
 
 // switch between logo options
@@ -15,6 +15,7 @@ $('.option-3 .reverse').click(function(){
    $('.option-3').toggleClass('option-3-reverse');
 })
 
+// OnePage Scroll Configuration
 
 // Move down button triggers moveDown method
 $('.move-down').click(function(){
